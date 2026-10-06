@@ -1,0 +1,27 @@
+name: GitOps Pull-Based Simulation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  gitops:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull Repository
+        uses: actions/checkout@v4
+
+      - name: Read Desired State
+        run: |
+          echo "GitOps controller pulled the repository"
+          echo "Desired application state:"
+          cat deployment.yaml
+
+      - name: Reconciliation
+        run: |
+          echo "Comparing desired state with actual state..."
+          echo "Changes detected"
+          echo "Synchronizing application..."
+          echo "Reconciliation completed"
